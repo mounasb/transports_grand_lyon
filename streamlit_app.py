@@ -899,6 +899,7 @@ if choice == 'À propos':
                   à savoir : **Pandas, Numpy, Plotly, Folium, et GeoPandas.** \
                   Notre choix s'est porté sur **Streamlit** pour la mise en page du dashboard\
                   et son déploiement sous forme d’application web.")
+    st.markdown("Le **code source** du projet est consultable [ici](https://github.com/mounasb/transports_grand_lyon).")
     st.text("")
 
     st.markdown("#### Remerciements")
