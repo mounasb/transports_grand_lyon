@@ -10,7 +10,7 @@ import streamlit.components.v1 as components
 from streamlit_option_menu import option_menu
 from fuzzywuzzy import fuzz
 import time
-import fonctions as fc
+import backend_functions.py as fc
 
 
 #Paramétrage
