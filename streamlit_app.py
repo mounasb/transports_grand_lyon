@@ -134,16 +134,16 @@ def get_map_velov_tr(df):
             p_dispo = 'place disponible'
 
         if nom:
-            pop = folium.Popup(f"<b>{nom}</b><br>• {velos_dispo} {v_dispo}<br>• {places_dispo} {p_dispo}", max_width=max_width)
+            tip = folium.Tooltip(f"<b>{nom}</b><br>• {velos_dispo} {v_dispo}<br>• {places_dispo} {p_dispo}",)
         else:
-            pop = folium.Popup(f"<b>{adresse}</b><br>• {velos_dispo} {v_dispo}<br>• {places_dispo} {p_dispo}", max_width=max_width)
+            tip = folium.Tooltip(f"<b>{adresse}</b><br>• {velos_dispo} {v_dispo}<br>• {places_dispo} {p_dispo}",)
 
         if status == 'CLOSED':
             icon = folium.Icon(color='gray', icon='glyphicon-remove')
-            pop = folium.Popup(f"<b>{df.loc[i]['name']}</b><br>• STATION FERMÉE", max_width=max_width)
+            tip = folium.Tooltip(f"<b>{df.loc[i]['name']}</b><br>• STATION FERMÉE",)
         else:
             if not availability:
-                pop = folium.Popup(f"<b>{nom}</b><br>Données non disponibles", max_width=max_width)
+                tip = folium.Tooltip(f"<b>{nom}</b><br>Données non disponibles",)
                 icon = folium.Icon(color='gray', icon="question-circle", prefix='fa')
             else:
                 velos_dispo = int(df.loc[i]['available_bikes'])
@@ -157,8 +157,8 @@ def get_map_velov_tr(df):
 
         folium.Marker(
             location=loc,
-            popup=pop,
             icon=icon,
+            tooltip=tip,
             ).add_to(velov_cluster)
 
     filename = 'data_grand_lyon/map_velov.html'
@@ -673,14 +673,14 @@ if choice == "Vélo'v : analyse":
     st.markdown("Avec 428 stations et 5 000 vélos, Vélo’v propose aux habitants des 32 communes\
         de la Métropole de Lyon depuis le 19 maI 2005 un vélo en libre-service, disponible 24h/24 et 7j/7.\
         En janvier 2022, la Métropole dispose de 424 stations ouvertes et 4 fermées.")
-    st.markdown("#### Découvrez l'évolution animée du remplissage des stations Vélo’v du 4ème arrondissement de Lyon, tout au long de la semaine (appuyez sur play sous le graphique).")
+    st.markdown("### Découvrez ci-dessous l'évolution animée du remplissage des stations Vélo’v du 4ème arrondissement de Lyon, tout au long de la semaine.")
 
+    st.error("Sélectionnez un jour de la semaine et appuyez sur play sous le graphique.")
     if 'velov' not in st.session_state:
         st.session_state['velov'] = get_df_velov()
 
     df_velov = st.session_state['velov']
-
-    liste_jours = ['Sélectionnez un jour de la semaine', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+    liste_jours = ['Jours de la semaine', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
     jour = st.selectbox('', options=liste_jours)
     st.text("")
 
@@ -721,11 +721,11 @@ if choice == "Vélo'v : analyse":
 
 if choice == "Vélo'v en temps réel":
     st.markdown("<h1 style='text-align: center; color: #FF4B4B;'>LES VÉLO'V : DISPONIBILITÉS EN TEMPS RÉEL</h1>", unsafe_allow_html=True)
-    st.info("Pour plus de confort, nous vous invitons à fermer le volet de gauche.")
-    st.markdown("##### Avec 425 stations et 5 000 vélos, Vélo’V propose aux habitants de la Métropole de Lyon\
+    st.info("Pour plus de confort, nous vous invitons à fermer le volet sur la gauche.")
+    st.write("Avec 425 stations et 5 000 vélos, Vélo’V propose aux habitants de la Métropole de Lyon\
         depuis 2005 un vélo en libre service, disponible 24h/24 et 7j/7.")
-    st.markdown("#### Les deux cartes ci-dessous représentent les disponibilités des Vélo'v en temps réel.")
-    st.markdown("###### Elles permettent aussi d'apprécier la répartition des stations sur l'ensemble du territoire de \
+    st.markdown("### La carte ci-dessous représente les disponibilités des Vélo'v en temps réel.")
+    st.markdown("###### Elle permet aussi d'apprécier la répartition des stations sur l'ensemble du territoire de \
                 l'agglomération.")
     st.text("")
 
@@ -763,13 +763,14 @@ if choice == "Parcs relais":
     st.markdown('•  Nombre total de places : 7 324', unsafe_allow_html=True)
     st.markdown('•  Nombre total de places PMR : 180', unsafe_allow_html=True)
     st.text("")
-    st.info("Pour plus de confort, nous vous invitons à fermer le volet de gauche.")
-    st.markdown("#### Découvrez ci-dessous l'évolution animée de la fréquentation des parcs relais de la Métropole de Lyon tout au long de la semaine :")
+    st.markdown("### Découvrez ci-dessous l'évolution animée de la fréquentation des parcs relais de la Métropole de Lyon tout au long de la semaine :")
+    st.error("Sélectionnez un jour de la semaine et appuyez sur play sous le graphique.")
+    st.text("Pour plus de confort, nous vous invitons à fermer le volet sur la gauche.")
 
     if 'parcs_relais' not in st.session_state:
         st.session_state['parcs_relais'] = get_df_parcs_relais()
     df_parc = st.session_state['parcs_relais']
-    liste_jours = ['Sélectionnez un jour de la semaine', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+    liste_jours = ['Jours de la semaine', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
 
     col1, col2 = st.columns(2)
     with col1:
@@ -836,8 +837,9 @@ if choice == "Horaires des tramways":
     st.markdown("Prochains projets qui seront mis en service avant 2026 : T6 nord (prolongement jusqu'à la Doua), T8 (Bellecour - Part Dieu\
         T9 (Vaulx en Velin - la Doua) et T10 (Vénissieux - St Fons - Gerland)")
 
-    st.markdown("#### La carte ci-dessous affiche les prochains passages des tramways, en temps réel.")
-    st.info("Pour plus de confort, nous vous invitons à fermer le volet de gauche.")
+    st.markdown("### La carte ci-dessous affiche les horaires des prochains passages de tramway, en temps réel.")
+    st.error("Sélectionnez une ligne de tramway, puis un terminus.")
+    st.text("Pour plus de confort, nous vous invitons à fermer le volet sur la gauche.")
 
     if 'passages' not in st.session_state:
         st.session_state['passages'] = get_passages_tram()
@@ -848,7 +850,7 @@ if choice == "Horaires des tramways":
     # import des données géo tram + selectboxes (choix lignes + terminus)
     traces_tram = get_json_tram()
     lignes_tram = sorted(passages['ligne'].unique())
-    lignes_tram.insert(0, 'Sélectionnez une ligne de tramway')
+    lignes_tram.insert(0, 'Lignes de tramway')
     tram_terminus = sorted(list(passages['direction'].unique()))
 
     col1, col2 = st.columns(2)
