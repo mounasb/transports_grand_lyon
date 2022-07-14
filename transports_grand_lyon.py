@@ -6,7 +6,6 @@ import json
 import datetime as dt
 import folium
 from folium.plugins import MarkerCluster
-from streamlit_folium import folium_static
 import streamlit.components.v1 as components
 from streamlit_option_menu import option_menu
 import fonctions as fc
