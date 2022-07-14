@@ -17,8 +17,8 @@ color_red_st = '#FF4B4B'
 # Authentification
 import base64
 from requests.auth import HTTPBasicAuth
-# USERNAME = st.secrets["USERNAME"]
-# PASSWORD = st.secrets["PASSWORD"]
+USERNAME = st.secrets["USERNAME"]
+PASSWORD = st.secrets["PASSWORD"]
 
 
 def get_request_json(r):
