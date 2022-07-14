@@ -8,9 +8,9 @@ import folium
 from folium.plugins import MarkerCluster
 import streamlit.components.v1 as components
 from streamlit_option_menu import option_menu
-import fonctions as fc
 from fuzzywuzzy import fuzz
 import time
+import fonctions as fc
 
 
 #Paramétrage

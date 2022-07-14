@@ -6,7 +6,6 @@ import pytz
 import folium
 from folium.plugins import MarkerCluster
 from fuzzywuzzy import fuzz
-import geopandas as gpd
 from shapely.geometry import Point
 import plotly.express as px
 

@@ -7,3 +7,5 @@ datetime
 folium
 fuzzywuzzy
 pytz
+“github/transports_grand_lyon/requirements.txt”:
+[-e] <github/transports_grand_lyon/fonctions.py>
