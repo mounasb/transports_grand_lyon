@@ -368,7 +368,7 @@ def get_map_tram(df, traces_tram, ligne, terminus):
         ts = p.loc[i]['timestamp']
         text_actu = f"Dernière actualisation à {request_time.strftime('%X')}"
 
-        tip = folium.Tooltip(f"<b>{nom}</b> <br> En direction de {terminus} <br> Prochain passage : {delai} <br> {text_actu}")
+        tip = folium.Tooltip(f"<b>{nom}</b> <br> En direction de {terminus} <br> Prochain passage : {delai}")
 
         # noms des terminus
         for term in tram_terminus:
