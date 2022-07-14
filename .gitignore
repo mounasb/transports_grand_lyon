@@ -1,4 +1,4 @@
 *.pyc
 *.html
-transports_grand_lyon_local.py
-fonctions_local.py
+streamlit_app_local.py
+backend_functions_local.py
